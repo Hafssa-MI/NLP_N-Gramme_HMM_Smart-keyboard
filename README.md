@@ -16,13 +16,20 @@ A next-word prediction engine built from classical NLP components: an interpolat
 ## Screenshots
 
 ### Writer
-![Writer view](docs/screenshots/writer.png)
+<img width="1783" height="736" alt="image" src="https://github.com/user-attachments/assets/86db946d-b0f6-491f-8f72-9be1de23320e" />
+<img width="1770" height="792" alt="image" src="https://github.com/user-attachments/assets/8649e147-03b2-4e69-8af8-c217718e2d3a" />
+
 
 ### Analysis
-![Analysis view](docs/screenshots/analysis.png)
+<img width="1784" height="812" alt="image" src="https://github.com/user-attachments/assets/b0c0d24a-2e46-4fcc-a5ee-c3bc022a095a" />
+<img width="1780" height="799" alt="image" src="https://github.com/user-attachments/assets/784c170f-f47f-468f-be6d-d4338e512788" />
+
+
 
 ### Evaluation
-![Evaluation view](docs/screenshots/evaluation.png)
+<img width="1774" height="796" alt="image" src="https://github.com/user-attachments/assets/a4f3d024-3769-42e8-add7-068e0352d616" />
+<img width="1779" height="784" alt="image" src="https://github.com/user-attachments/assets/e93e8773-4fcf-497d-8660-192f7dbdc742" />
+
 
 ## How it works
 
