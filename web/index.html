@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Smart Keyboard</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="guide.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <div>
+      <strong>Smart Keyboard</strong>
+      <span class="brand-sub">Next-word prediction with n-gram and HMM models</span>
+    </div>
+  </div>
+  <nav class="tabs" id="tabs" role="tablist">
+    <button class="tab is-active" data-view="writer" role="tab">Writer</button>
+    <button class="tab" data-view="analysis" role="tab">Analysis</button>
+    <button class="tab" data-view="evaluation" role="tab">Evaluation</button>
+    <span class="tab-ink" id="tabInk"></span>
+  </nav>
+  <div class="status" id="status"><span class="status-dot"></span><span id="statusText">Connecting</span></div>
+</header>
+
+<main>
+  <!-- WRITER -->
+  <section class="view is-active" id="view-writer">
+    <div class="layout">
+      <div class="stack">
+        <div class="card">
+          <div class="card-head"><h2>Compose</h2><span class="muted" id="wordCount">0 words</span></div>
+          <textarea id="editor" rows="7" spellcheck="false" autofocus
+                    placeholder="Start typing. Suggestions follow the cursor."></textarea>
+          <div class="suggest-bar" id="slots" aria-live="polite"></div>
+          <div class="keys">
+            <span><kbd>Tab</kbd> accept first</span>
+            <span><kbd>Alt</kbd> + <kbd>1</kbd> to <kbd>5</kbd> choose</span>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-head"><h3>Phrase completions</h3><span class="muted">Beam search, 4 words</span></div>
+          <ul class="phrases" id="phrases"></ul>
+        </div>
+      </div>
+
+      <aside class="stack">
+        <div class="card">
+          <div class="card-head"><h3>Engine state</h3></div>
+          <dl class="kv">
+            <div><dt>Mode</dt><dd id="stMode">-</dd></div>
+            <div><dt>Context order</dt><dd id="stOrder">-</dd></div>
+            <div><dt>Latency</dt><dd id="stLatency">-</dd></div>
+          </dl>
+          <div class="ctx" id="stContext"></div>
+        </div>
+        <div class="card">
+          <div class="card-head"><h3>Next tag, HMM</h3></div>
+          <ul class="rank" id="nextTags"></ul>
+        </div>
+        <div class="card">
+          <div class="card-head"><h3>Options</h3></div>
+          <label class="switch"><input type="checkbox" id="optHmm" checked><span class="track"></span><span>Syntactic model (HMM)</span></label>
+          <label class="switch"><input type="checkbox" id="optPersonal" checked><span class="track"></span><span>Personal profile</span></label>
+          <div class="seg" id="seg">
+            <span class="muted">Suggestions</span>
+            <button data-k="3" class="is-active">3</button>
+            <button data-k="5">5</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-head"><h3>Personal profile</h3></div>
+          <p class="muted">Learn the vocabulary and phrasing of your text. Stored in memory for this session only.</p>
+          <div class="row">
+            <button class="btn" id="btnLearn">Learn from text</button>
+            <button class="btn btn-ghost" id="btnForget">Reset</button>
+          </div>
+          <p class="note" id="profileNote">Nothing learned yet.</p>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ANALYSIS -->
+  <section class="view" id="view-analysis">
+    <div class="card">
+      <div class="card-head"><h2>Sentence analysis</h2><span class="muted">Viterbi tagging and model comparison</span></div>
+      <input id="analysisInput" class="line-input" value="i thought the acting was " spellcheck="false">
+      <div class="tag-row" id="tagRow"></div>
+      <div class="legend" id="legend"></div>
+    </div>
+    <div class="grid-2">
+      <div class="card"><div class="card-head"><h3>N-gram only</h3><span class="muted">Kneser-Ney</span></div><ul class="rank" id="rankBase"></ul></div>
+      <div class="card"><div class="card-head"><h3>N-gram with HMM</h3><span class="muted">Syntactic reweighting</span></div><ul class="rank" id="rankHmm"></ul></div>
+    </div>
+  </section>
+
+  <!-- EVALUATION -->
+  <section class="view" id="view-evaluation">
+    <div class="metrics" id="metricCards"></div>
+    <div class="card">
+      <div class="card-head"><h2>Model comparison</h2><span class="muted" id="datasetLine"></span></div>
+      <div class="table-wrap"><table id="modelTable"></table></div>
+    </div>
+    <div class="grid-2">
+      <div class="card"><div class="card-head"><h3>HMM weight (validation)</h3></div><div class="table-wrap"><table id="sweepTable"></table></div></div>
+      <div class="card"><div class="card-head"><h3>POS tagger</h3></div><dl class="kv" id="posStats"></dl></div>
+    </div>
+  </section>
+</main>
+
+<script src="app.js"></script>
+<script src="guide.js"></script>
+</body>
+</html>
