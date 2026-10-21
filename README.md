@@ -1,3 +1,5 @@
+# Author : Hafssa Miftah Idrissi
+
 # Smart Keyboard
 
 A next-word prediction engine built from classical NLP components: an interpolated Kneser-Ney trigram language model combined with a part-of-speech Hidden Markov Model (HMM). The engine is served through a FastAPI backend and a browser interface.
